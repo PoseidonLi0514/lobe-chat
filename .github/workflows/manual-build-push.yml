@@ -1,49 +1,84 @@
-name: Manual Docker Build and Push
+name: Manual Docker Build and Push (Latest Pushed Branch)
+
+permissions:
+  contents: read
+
 on:
-  workflow_dispatch: # 只允许手动触发
+  workflow_dispatch:
 
 jobs:
-  manual_build_push:
-    name: Manually Build and Push Docker Image (amd64)
-    runs-on: ubuntu-latest # 使用标准的 amd64 runner
+  build_and_push:
+    runs-on: ubuntu-latest
 
     steps:
-      # 1. 检出代码，确保 Dockerfile 等文件存在
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Find latest pushed branch
+        id: latest
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          REPO="${GITHUB_REPOSITORY}"
+          DEFAULT_BRANCH=$(gh api repos/$REPO --jq .default_branch)
+          REF=$(gh api repos/$REPO/events --jq 'first(.[] | select(.type=="PushEvent")).payload.ref' || true)
+          BRANCH="${REF#refs/heads/}"
+          if [ -z "$BRANCH" ] || [ "$BRANCH" = "refs/heads/" ]; then
+            BRANCH="$DEFAULT_BRANCH"
+          fi
+          echo "branch=$BRANCH" >> "$GITHUB_OUTPUT"
 
-      # 2. 设置 Docker Buildx
+      - name: Checkout selected branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.latest.outputs.branch }}
+          fetch-depth: 0
+
+      - name: Resolve Dockerfile path
+        id: dkfile
+        run: |
+          if [ -f "./Dockerfile.database" ]; then
+            echo "file=./Dockerfile.database" >> "$GITHUB_OUTPUT"
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          elif [ -f "./Dockerfile" ]; then
+            echo "file=./Dockerfile" >> "$GITHUB_OUTPUT"
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Set up Docker Buildx
+        if: ${{ steps.dkfile.outputs.exists == 'true' }}
         uses: docker/setup-buildx-action@v3
 
-      # 3. 登录到你的 Docker Hub
       - name: Log in to Docker Hub
+        if: ${{ steps.dkfile.outputs.exists == 'true' }}
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # 4. 生成 Docker 元数据 (标签)
-      - name: Extract metadata (tags, labels) for Docker
+      - name: Compute image tags
         id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: marvinlee514/lobechat-docker-clerk
-          tags: |
-            type=raw,value=latest
-            type=sha,prefix=,suffix=,format=short
+        if: ${{ steps.dkfile.outputs.exists == 'true' }}
+        run: |
+          IMAGE="marvinlee514/lobechat-docker-clerk"
+          BRANCH="${{ steps.latest.outputs.branch }}"
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          echo "tags=$IMAGE:latest,$IMAGE:$BRANCH,$IMAGE:$SHORT_SHA" >> "$GITHUB_OUTPUT"
 
-      # 5. 构建并推送 Docker 镜像
       - name: Build and push Docker image (amd64)
+        if: ${{ steps.dkfile.outputs.exists == 'true' }}
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile.database
+          file: ${{ steps.dkfile.outputs.file }}
           platforms: linux/amd64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY_ARG=${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
             CLERK_WEBHOOK_SECRET_ARG=${{ secrets.CLERK_WEBHOOK_SECRET }}
             CLERK_SECRET_KEY_ARG=${{ secrets.CLERK_SECRET_KEY }}
+
+      - name: Skip build (no Dockerfile found)
+        if: ${{ steps.dkfile.outputs.exists != 'true' }}
+        run: echo "No Dockerfile or Dockerfile.database found. Skip."
