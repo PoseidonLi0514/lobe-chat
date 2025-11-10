@@ -27,6 +27,7 @@ jobs:
           DEFAULT_BRANCH=$(gh api repos/$UPSTREAM_REPO --jq .default_branch)
           echo "branch=$DEFAULT_BRANCH" >> "$GITHUB_OUTPUT"
           echo "repo=$UPSTREAM_REPO" >> "$GITHUB_OUTPUT"
+
       # 1. 检出当前仓库代码（获取完整历史）
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -39,6 +40,7 @@ jobs:
         with:
           actions: 'close-issues'
           labels: '🚨 Sync Fail'
+
       # 3. 按“上游默认分支”进行同步；目标分支与上游分支同名（main->main / next->next）
       - name: Sync upstream changes
         id: sync
@@ -73,22 +75,37 @@ jobs:
           ref: ${{ steps.get-default.outputs.branch }}
           fetch-depth: 0
 
-      # --- Docker 构建与推送，仅当本次确实拉到新提交 ---
-      - name: Set up Docker Buildx
+      # 5.1 解析 Dockerfile 路径（优先 Dockerfile.database，回退 Dockerfile）
+      - name: Resolve Dockerfile path
+        id: dkfile
         if: success() && steps.sync.outputs.has_new_commits == 'true'
+        run: |
+          if [ -f "./Dockerfile.database" ]; then
+            echo "file=./Dockerfile.database" >> "$GITHUB_OUTPUT"
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          elif [ -f "./Dockerfile" ]; then
+            echo "file=./Dockerfile" >> "$GITHUB_OUTPUT"
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # --- Docker 构建与推送，仅当本次确实拉到新提交 且 找到 Dockerfile ---
+      - name: Set up Docker Buildx
+        if: success() && steps.sync.outputs.has_new_commits == 'true' && steps.dkfile.outputs.exists == 'true'
         uses: docker/setup-buildx-action@v3
 
       - name: Log in to Docker Hub
-        if: success() && steps.sync.outputs.has_new_commits == 'true'
+        if: success() && steps.sync.outputs.has_new_commits == 'true' && steps.dkfile.outputs.exists == 'true'
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # 这里的分支标签与上游默认分支保持一致（例如 next 或 main），同时保留 latest
+      # 分支标签与上游默认分支保持一致（例如 next 或 main），同时保留 latest
       - name: Extract metadata (tags, labels) for Docker
         id: meta
-        if: success() && steps.sync.outputs.has_new_commits == 'true'
+        if: success() && steps.sync.outputs.has_new_commits == 'true' && steps.dkfile.outputs.exists == 'true'
         uses: docker/metadata-action@v5
         with:
           images: marvinlee514/lobechat-docker-clerk
@@ -98,11 +115,11 @@ jobs:
             type=sha,format=short
 
       - name: Build and push Docker image (amd64)
-        if: success() && steps.sync.outputs.has_new_commits == 'true'
+        if: success() && steps.sync.outputs.has_new_commits == 'true' && steps.dkfile.outputs.exists == 'true'
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile.database   # 确认此路径在仓库中存在
+          file: ${{ steps.dkfile.outputs.file }}
           platforms: linux/amd64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
@@ -111,3 +128,8 @@ jobs:
             NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY_ARG=${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
             CLERK_WEBHOOK_SECRET_ARG=${{ secrets.CLERK_WEBHOOK_SECRET }}
             CLERK_SECRET_KEY_ARG=${{ secrets.CLERK_SECRET_KEY }}
+
+      # 没找到 Dockerfile 时给出可见日志（不打断工作流）
+      - name: Skip build (no Dockerfile)
+        if: success() && steps.sync.outputs.has_new_commits == 'true' && steps.dkfile.outputs.exists == 'false'
+        run: echo "No Dockerfile.database or Dockerfile found; skipping docker build."
