@@ -75,9 +75,9 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           build-args: |
-            NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY_ARG=${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
-            CLERK_WEBHOOK_SECRET_ARG=${{ secrets.CLERK_WEBHOOK_SECRET }}
-            CLERK_SECRET_KEY_ARG=${{ secrets.CLERK_SECRET_KEY }}
+            NEXT_PUBLIC_ENABLE_NEXT_AUTH=${{ vars.NEXT_PUBLIC_ENABLE_NEXT_AUTH }}
+            NEXT_PUBLIC_ENABLE_CLERK_AUTH=${{ vars.NEXT_PUBLIC_ENABLE_CLERK_AUTH }}
+            NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
 
       - name: Skip build (no Dockerfile found)
         if: ${{ steps.dkfile.outputs.exists != 'true' }}
