@@ -125,9 +125,9 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY_ARG=${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
-            CLERK_WEBHOOK_SECRET_ARG=${{ secrets.CLERK_WEBHOOK_SECRET }}
-            CLERK_SECRET_KEY_ARG=${{ secrets.CLERK_SECRET_KEY }}
+            NEXT_PUBLIC_ENABLE_NEXT_AUTH=${{ vars.NEXT_PUBLIC_ENABLE_NEXT_AUTH }}
+            NEXT_PUBLIC_ENABLE_CLERK_AUTH=${{ vars.NEXT_PUBLIC_ENABLE_CLERK_AUTH }}
+            NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
 
       # 没找到 Dockerfile 时给出可见日志（不打断工作流）
       - name: Skip build (no Dockerfile)
