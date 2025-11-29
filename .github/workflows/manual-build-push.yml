@@ -73,6 +73,8 @@ jobs:
           file: ${{ steps.dkfile.outputs.file }}
           platforms: linux/amd64
           push: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           tags: ${{ steps.meta.outputs.tags }}
           build-args: |
             NEXT_PUBLIC_ENABLE_NEXT_AUTH=${{ vars.NEXT_PUBLIC_ENABLE_NEXT_AUTH }}
