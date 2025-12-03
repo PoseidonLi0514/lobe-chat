@@ -2,6 +2,107 @@
 
 # Changelog
 
+## [Version 2.0.0-next.151](https://github.com/lobehub/lobe-chat/compare/v2.0.0-next.150...v2.0.0-next.151)
+
+<sup>Released on **2025-12-03**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Unify retry logic to async-retry.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Unify retry logic to async-retry, closes [#10579](https://github.com/lobehub/lobe-chat/issues/10579) ([95f31bc](https://github.com/lobehub/lobe-chat/commit/95f31bc))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 2.0.0-next.150](https://github.com/lobehub/lobe-chat/compare/v2.0.0-next.149...v2.0.0-next.150)
+
+<sup>Released on **2025-12-03**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Better-auth add apple sso icon and label.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Better-auth add apple sso icon and label, closes [#10570](https://github.com/lobehub/lobe-chat/issues/10570) ([17facd5](https://github.com/lobehub/lobe-chat/commit/17facd5))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 2.0.0-next.149](https://github.com/lobehub/lobe-chat/compare/v2.0.0-next.148...v2.0.0-next.149)
+
+<sup>Released on **2025-12-03**</sup>
+
+#### 🐛 Bug Fixes
+
+- **desktop**: Add token refresh retry mechanism.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **desktop**: Add token refresh retry mechanism, closes [#10575](https://github.com/lobehub/lobe-chat/issues/10575) ([83fc2e8](https://github.com/lobehub/lobe-chat/commit/83fc2e8))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 2.0.0-next.148](https://github.com/lobehub/lobe-chat/compare/v2.0.0-next.147...v2.0.0-next.148)
+
+<sup>Released on **2025-12-03**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Remove apiMode param from Azure and Cloudflare provider requests, when desktop use contextMenu not work.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Remove apiMode param from Azure and Cloudflare provider requests, closes [#10571](https://github.com/lobehub/lobe-chat/issues/10571) ([7e44faa](https://github.com/lobehub/lobe-chat/commit/7e44faa))
+- **misc**: When desktop use contextMenu not work, closes [#10545](https://github.com/lobehub/lobe-chat/issues/10545) ([43c4db7](https://github.com/lobehub/lobe-chat/commit/43c4db7))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 2.0.0-next.147](https://github.com/lobehub/lobe-chat/compare/v2.0.0-next.146...v2.0.0-next.147)
 
 <sup>Released on **2025-12-02**</sup>
