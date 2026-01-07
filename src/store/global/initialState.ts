@@ -106,6 +106,14 @@ export interface SystemStatus {
    */
   lastSelectedImageModel?: string;
   /**
+   * Resource Manager column widths
+   */
+  resourceManagerColumnWidths?: {
+    date: number;
+    name: number;
+    size: number;
+  };
+  /**
    * 记住用户最后选择的图像生成提供商
    */
   lastSelectedImageProvider?: string;
@@ -113,6 +121,14 @@ export interface SystemStatus {
   leftPanelWidth: number;
   mobileShowPortal?: boolean;
   mobileShowTopic?: boolean;
+  /**
+   * ModelSwitchPanel 的分组模式
+   */
+  modelSwitchPanelGroupMode?: 'byModel' | 'byProvider';
+  /**
+   * ModelSwitchPanel 的宽度
+   */
+  modelSwitchPanelWidth?: number;
   noWideScreen?: boolean;
   /**
    * number of pages (documents) to display per page
@@ -179,6 +195,13 @@ export const INITIAL_STATUS = {
   knowledgeBaseModalViewMode: 'list' as const,
   leftPanelWidth: 320,
   mobileShowTopic: false,
+  resourceManagerColumnWidths: {
+    date: 160,
+    name: 574,
+    size: 140,
+  },
+  modelSwitchPanelGroupMode: 'byProvider',
+  modelSwitchPanelWidth: 430,
   noWideScreen: true,
   pagePageSize: 20,
   portalWidth: 400,
