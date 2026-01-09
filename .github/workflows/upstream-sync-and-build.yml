@@ -74,6 +74,7 @@ jobs:
         with:
           ref: ${{ steps.get-default.outputs.branch }}
           fetch-depth: 0
+          persist-credentials: false
 
       # 5.1 解析 Dockerfile 路径（优先 Dockerfile.database，回退 Dockerfile）
       - name: Resolve Dockerfile path
