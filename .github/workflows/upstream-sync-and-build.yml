@@ -21,7 +21,7 @@ jobs:
       - name: Get upstream default branch
         id: get-default
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           UPSTREAM_REPO="lobehub/lobe-chat"
           DEFAULT_BRANCH=$(gh api repos/$UPSTREAM_REPO --jq .default_branch)
