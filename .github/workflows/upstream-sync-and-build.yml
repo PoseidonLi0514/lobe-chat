@@ -49,7 +49,7 @@ jobs:
           upstream_sync_repo: ${{ steps.get-default.outputs.repo }}
           upstream_sync_branch: ${{ steps.get-default.outputs.branch }}
           target_sync_branch:  ${{ steps.get-default.outputs.branch }}
-          target_repo_token:   ${{ secrets.GITHUB_TOKEN }}
+          target_repo_token:   ${{ secrets.PAT_TOKEN }}
           test_mode: false
 
       # 4. 同步失败则建 issue
