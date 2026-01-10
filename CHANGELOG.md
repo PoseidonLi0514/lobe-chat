@@ -2,6 +2,81 @@
 
 # Changelog
 
+## [Version 2.0.0-next.260](https://github.com/lobehub/lobe-chat/compare/v2.0.0-next.259...v2.0.0-next.260)
+
+<sup>Released on **2026-01-10**</sup>
+
+#### ✨ Features
+
+- **conversation**: Use native context menu when selection is within current ChatItem.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **conversation**: Use native context menu when selection is within current ChatItem, closes [#11400](https://github.com/lobehub/lobe-chat/issues/11400) ([9778dce](https://github.com/lobehub/lobe-chat/commit/9778dce))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 2.0.0-next.259](https://github.com/lobehub/lobe-chat/compare/v2.0.0-next.258...v2.0.0-next.259)
+
+<sup>Released on **2026-01-10**</sup>
+
+#### ✨ Features
+
+- **misc**: Update the cron patterns fields values.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's improved
+
+- **misc**: Update the cron patterns fields values, closes [#11399](https://github.com/lobehub/lobe-chat/issues/11399) ([7632cef](https://github.com/lobehub/lobe-chat/commit/7632cef))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 2.0.0-next.258](https://github.com/lobehub/lobe-chat/compare/v2.0.0-next.257...v2.0.0-next.258)
+
+<sup>Released on **2026-01-10**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: Fix memory search context.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: Fix memory search context, closes [#11393](https://github.com/lobehub/lobe-chat/issues/11393) ([9f51a4c](https://github.com/lobehub/lobe-chat/commit/9f51a4c))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 2.0.0-next.257](https://github.com/lobehub/lobe-chat/compare/v2.0.0-next.256...v2.0.0-next.257)
 
 <sup>Released on **2026-01-10**</sup>
