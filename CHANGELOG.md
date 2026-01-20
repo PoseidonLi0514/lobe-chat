@@ -2,6 +2,169 @@
 
 # Changelog
 
+## [Version 2.0.0-next.327](https://github.com/lobehub/lobe-chat/compare/v2.0.0-next.326...v2.0.0-next.327)
+
+<sup>Released on **2026-01-20**</sup>
+
+#### ♻ Code Refactoring
+
+- **model-select**: Migrate FunctionCallingModelSelect to LobeSelect.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **model-select**: Migrate FunctionCallingModelSelect to LobeSelect, closes [#11664](https://github.com/lobehub/lobe-chat/issues/11664) ([ad51305](https://github.com/lobehub/lobe-chat/commit/ad51305))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 2.0.0-next.326](https://github.com/lobehub/lobe-chat/compare/v2.0.0-next.325...v2.0.0-next.326)
+
+<sup>Released on **2026-01-20**</sup>
+
+#### 🐛 Bug Fixes
+
+- **desktop**: Gracefully handle missing update manifest 404 errors.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **desktop**: Gracefully handle missing update manifest 404 errors, closes [#11625](https://github.com/lobehub/lobe-chat/issues/11625) ([13e95b9](https://github.com/lobehub/lobe-chat/commit/13e95b9))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 2.0.0-next.325](https://github.com/lobehub/lobe-chat/compare/v2.0.0-next.324...v2.0.0-next.325)
+
+<sup>Released on **2026-01-20**</sup>
+
+#### ♻ Code Refactoring
+
+- **ModelSwitchPanel**: Migrate from Popover to DropdownMenu with virtual scrolling.
+
+#### 🐛 Bug Fixes
+
+- **sidebar-drawer**: Fix drawer positioning and title style.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **ModelSwitchPanel**: Migrate from Popover to DropdownMenu with virtual scrolling, closes [#11663](https://github.com/lobehub/lobe-chat/issues/11663) ([c9d9dff](https://github.com/lobehub/lobe-chat/commit/c9d9dff))
+
+#### What's fixed
+
+- **sidebar-drawer**: Fix drawer positioning and title style, closes [#11655](https://github.com/lobehub/lobe-chat/issues/11655) ([cf5320e](https://github.com/lobehub/lobe-chat/commit/cf5320e))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 2.0.0-next.324](https://github.com/lobehub/lobe-chat/compare/v2.0.0-next.323...v2.0.0-next.324)
+
+<sup>Released on **2026-01-20**</sup>
+
+#### 🐛 Bug Fixes
+
+- **misc**: TypewriterEffect not refreshing on language change.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### What's fixed
+
+- **misc**: TypewriterEffect not refreshing on language change, closes [#11657](https://github.com/lobehub/lobe-chat/issues/11657) ([ba30f46](https://github.com/lobehub/lobe-chat/commit/ba30f46))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
+## [Version 2.0.0-next.323](https://github.com/lobehub/lobe-chat/compare/v2.0.0-next.322...v2.0.0-next.323)
+
+<sup>Released on **2026-01-20**</sup>
+
+#### ♻ Code Refactoring
+
+- **misc**: Optimize lobehub models and default configuration.
+
+#### ✨ Features
+
+- **misc**: Add the agents and agents group fork feature.
+
+#### 🐛 Bug Fixes
+
+- **model-runtime**: Fix Qwen parallel tool calls arguments incorrectly merged.
+- **topic**: Correct topic item href route for agent and group pages.
+- **misc**: Fix Topic component causing stack overflow and freezing the app, simplify updater config logic, slove the nuqs error in commnuity agent group page.
+
+#### 💄 Styles
+
+- **misc**: Optimize profile settings skeleton screen.
+
+<br/>
+
+<details>
+<summary><kbd>Improvements and Fixes</kbd></summary>
+
+#### Code refactoring
+
+- **misc**: Optimize lobehub models and default configuration, closes [#11621](https://github.com/lobehub/lobe-chat/issues/11621) ([5074fbe](https://github.com/lobehub/lobe-chat/commit/5074fbe))
+
+#### What's improved
+
+- **misc**: Add the agents and agents group fork feature, closes [#11652](https://github.com/lobehub/lobe-chat/issues/11652) ([b1c3b83](https://github.com/lobehub/lobe-chat/commit/b1c3b83))
+
+#### What's fixed
+
+- **model-runtime**: Fix Qwen parallel tool calls arguments incorrectly merged, closes [#11649](https://github.com/lobehub/lobe-chat/issues/11649) ([ddbe661](https://github.com/lobehub/lobe-chat/commit/ddbe661))
+- **topic**: Correct topic item href route for agent and group pages, closes [#11607](https://github.com/lobehub/lobe-chat/issues/11607) ([2fffe8b](https://github.com/lobehub/lobe-chat/commit/2fffe8b))
+- **misc**: Fix Topic component causing stack overflow and freezing the app, closes [#11609](https://github.com/lobehub/lobe-chat/issues/11609) ([600cb85](https://github.com/lobehub/lobe-chat/commit/600cb85))
+- **misc**: Simplify updater config logic, closes [#11636](https://github.com/lobehub/lobe-chat/issues/11636) ([5c645f0](https://github.com/lobehub/lobe-chat/commit/5c645f0))
+- **misc**: Slove the nuqs error in commnuity agent group page, closes [#11651](https://github.com/lobehub/lobe-chat/issues/11651) ([1c29bca](https://github.com/lobehub/lobe-chat/commit/1c29bca))
+
+#### Styles
+
+- **misc**: Optimize profile settings skeleton screen, closes [#11656](https://github.com/lobehub/lobe-chat/issues/11656) ([e61ae85](https://github.com/lobehub/lobe-chat/commit/e61ae85))
+
+</details>
+
+<div align="right">
+
+[![](https://img.shields.io/badge/-BACK_TO_TOP-151515?style=flat-square)](#readme-top)
+
+</div>
+
 ## [Version 2.0.0-next.322](https://github.com/lobehub/lobe-chat/compare/v2.0.0-next.321...v2.0.0-next.322)
 
 <sup>Released on **2026-01-20**</sup>
